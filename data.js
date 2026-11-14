@@ -12,7 +12,8 @@ window.PORTFOLIO_DATA = {
     linkedin: "https://www.linkedin.com/in/ibad-jahangir-a57148356",
     phone: "",
     photo: "",
-    cv: "",\n    availability: "Open to opportunities, internships, freelance projects and collaborations in AI, software and data."
+    cv: "",
+    availability: "Open to opportunities, internships, freelance projects and collaborations in AI, software and data."
   },
   about: [
     "I am Ibad Jahangir, an AI & Software Developer and Mathematician with a strong interest in Artificial Intelligence, Software Development, and Data Analytics.",
@@ -70,5 +71,6 @@ window.PORTFOLIO_DATA = {
     ["Mathematical Problem-Solving","Applying structured reasoning to complex questions."]
   ],
   credentials: [],
-  showCredentials: false,\n  formEndpoint: ""
+  showCredentials: false,
+  formEndpoint: ""
 };
