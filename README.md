@@ -20,7 +20,8 @@ Precision Studio uses a deep green-black base, warm ivory typography, and restra
 - Scroll progress, active navigation, reveal transitions, and back-to-top control
 - Email copy action and accessible toast feedback
 - Contact form validates fields and uses a pre-filled mailto by default; optional Formspree POST mode is supported
-- Verified GitHub/LinkedIn/email links, availability statement, and location card\n- Conditional phone, CV, and credentials content (absent by default)
+- Verified GitHub/LinkedIn/email links, availability statement, and location card
+- Conditional phone, CV, and credentials content (absent by default)
 - Contact column includes a verified location card to keep the layout balanced
 - SEO metadata, Open Graph preview, JSON-LD Person data, and custom 404 page
 
@@ -87,7 +88,18 @@ Most portfolio content lives in `data.js`:
 
 Only add links, technologies, features, credentials, or project statuses that can be verified.
 
-## Configure the contact form\n\nThe default `formEndpoint` in `data.js` is empty. The form then opens the visitor's email app with a pre-filled message and does not claim it was sent. To enable direct submission:\n\n1. Create a free form at [Formspree](https://formspree.io/).\n2. Copy its endpoint (for example, `https://formspree.io/f/your-form-id`).\n3. Set `formEndpoint` in `data.js` to that URL.\n4. Test a submission and verify delivery in your Formspree inbox.\n\nThe form includes a hidden honeypot and inline validation.\n\n## Add optional content
+## Configure the contact form
+
+The default `formEndpoint` in `data.js` is empty. The form then opens the visitor's email app with a pre-filled message and does not claim it was sent. To enable direct submission:
+
+1. Create a free form at [Formspree](https://formspree.io/).
+2. Copy its endpoint (for example, `https://formspree.io/f/your-form-id`).
+3. Set `formEndpoint` in `data.js` to that URL.
+4. Test a submission and verify delivery in your Formspree inbox.
+
+The form includes a hidden honeypot and inline validation.
+
+## Add optional content
 
 - **LinkedIn:** set `profile.linkedin` to the real profile URL.
 - **Phone:** set `profile.phone` to the number intended for public display.
