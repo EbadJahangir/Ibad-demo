@@ -12,15 +12,15 @@ Precision Studio uses a deep green-black base, warm ivory typography, and restra
 
 - Dark and light themes; system preference on first visit and saved user choice
 - Responsive navigation, skip link, keyboard focus styles, and reduced-motion support
-- Animated professional role headline (static with reduced motion)
+- Animated professional role headline and lightweight hero network canvas (paused off-screen/hidden tab; static with reduced motion)
 - Data-driven content in `data.js`
-- Skills, capability cards, project case studies, education, and interests
+- Editorial section headings, 3-column equal-height skills, What I Build, alternating project case studies, education, and interests
 - Case-study dialogs with implementation/development/planned status distinctions
 - Keyboard command palette (Ctrl/Cmd + K)
 - Scroll progress, active navigation, reveal transitions, and back-to-top control
 - Email copy action and accessible toast feedback
-- Contact form validates fields and opens the visitor's email application with a pre-filled message; it does not send messages through a backend
-- Conditional LinkedIn, phone, CV section/navigation, and credentials content
+- Contact form validates fields and uses a pre-filled mailto by default; optional Formspree POST mode is supported
+- Verified GitHub/LinkedIn/email links, availability statement, and location card\n- Conditional phone, CV, and credentials content (absent by default)
 - Contact column includes a verified location card to keep the layout balanced
 - SEO metadata, Open Graph preview, JSON-LD Person data, and custom 404 page
 
@@ -87,7 +87,7 @@ Most portfolio content lives in `data.js`:
 
 Only add links, technologies, features, credentials, or project statuses that can be verified.
 
-## Add optional content
+## Configure the contact form\n\nThe default `formEndpoint` in `data.js` is empty. The form then opens the visitor's email app with a pre-filled message and does not claim it was sent. To enable direct submission:\n\n1. Create a free form at [Formspree](https://formspree.io/).\n2. Copy its endpoint (for example, `https://formspree.io/f/your-form-id`).\n3. Set `formEndpoint` in `data.js` to that URL.\n4. Test a submission and verify delivery in your Formspree inbox.\n\nThe form includes a hidden honeypot and inline validation.\n\n## Add optional content
 
 - **LinkedIn:** set `profile.linkedin` to the real profile URL.
 - **Phone:** set `profile.phone` to the number intended for public display.
@@ -127,4 +127,4 @@ Do not force-push over existing history.
 
 ## Validation status
 
-GitHub source files and the private HMS README were inspected for this update. The site has not been run in a browser, tested at every requested viewport, audited with Lighthouse, or subjected to an automated accessibility scan in this environment. No Lighthouse score or browser-test pass is claimed.
+GitHub source files and the private HMS README were inspected for this update. The repository files were updated through GitHub. No browser automation or local browser was available for this update; therefore responsive breakpoints, keyboard interactions, Formspree live delivery, Lighthouse, and automated accessibility checks have not been executed. No performance score or test pass is claimed. No Lighthouse score or browser-test pass is claimed.
