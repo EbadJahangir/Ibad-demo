@@ -2,7 +2,7 @@
 window.PORTFOLIO_DATA = {
   profile: {
     name: "Ibad Jahangir",
-    headline: "AI & Software Developer",
+    headline: "AI & Software Developer | Aspiring Data Analyst | Mathematician",
     supporting: "Aspiring Data Analyst | Mathematician",
     tagline: "Where Mathematics Meets Technology.",
     description: "Exploring Artificial Intelligence, building practical software, and transforming ideas into intelligent digital solutions.",
@@ -16,7 +16,7 @@ window.PORTFOLIO_DATA = {
   },
   about: [
     "I am Ibad Jahangir, an AI & Software Developer and Mathematician with a strong interest in Artificial Intelligence, Software Development, and Data Analytics.",
-    "I enjoy exploring the connection between logical reasoning, analytical thinking, and modern technology.",
+    "With a background in Mathematics, I enjoy exploring the connection between logical reasoning, analytical thinking, and modern technology.",
     "I work on building practical software applications, experimenting with AI-powered solutions, developing backend systems, and working with databases.",
     "My goal is to transform ideas into meaningful digital products while continuously exploring emerging technologies and improving my technical capabilities."
   ],
