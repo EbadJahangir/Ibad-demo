@@ -35,7 +35,7 @@ window.PORTFOLIO_DATA = {
       id: "orvexa", number: "01", name: "ORVEXA", subtitle: "AI Workspace",
       description: "An AI-powered workspace concept designed to bring intelligent assistance and productivity capabilities together in one environment.",
       status: "In Development", statusType: "progress",
-      stack: ["AI Product Experimentation","Product Design"],
+      stack: [],
       overview: "ORVEXA is an AI workspace product being developed as a unified environment for intelligent assistance and productivity workflows. Its repository and implementation details were not available for independent verification during this portfolio update.",
       problem: "The product direction explores how related AI and productivity workflows could be organized within one coherent workspace.",
       workflow: ["Explore product needs","Design workspace workflows","Develop and integrate capabilities","Refine the product"],
