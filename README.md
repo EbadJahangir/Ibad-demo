@@ -15,7 +15,7 @@ Precision Studio uses a deep green-black base, warm ivory typography, and restra
 - Animated professional role headline and lightweight hero network canvas (paused off-screen/hidden tab; static with reduced motion)
 - Data-driven content in `data.js`
 - Editorial section headings, 3-column equal-height skills, What I Build, alternating project case studies, education, and interests
-- Case-study dialogs with implementation/development/planned status distinctions
+- Custom CSS interface illustrations for ORVEXA and HMS (not screenshots)\n- Case-study dialogs with implementation/development/planned status distinctions\n- Mobile navigation focus trap, keyboard palette, and reduced-motion-aware canvas
 - Keyboard command palette (Ctrl/Cmd + K)
 - Scroll progress, active navigation, reveal transitions, and back-to-top control
 - Email copy action and accessible toast feedback
@@ -32,7 +32,7 @@ Precision Studio uses a deep green-black base, warm ivory typography, and restra
 - Vanilla JavaScript (no framework, backend, paid API, or API key)
 - Inline CSS illustrations
 
-Google Fonts (Bricolage Grotesque, DM Sans, JetBrains Mono) are loaded remotely with system fallbacks.
+Google Fonts (Playfair Display, Inter, JetBrains Mono) are loaded remotely with system fallbacks.
 
 ## Project structure
 
@@ -101,7 +101,7 @@ The form includes a hidden honeypot and inline validation.
 
 ## Add optional content
 
-- **LinkedIn:** set `profile.linkedin` to the real profile URL.
+- **LinkedIn:** already configured with the owner-provided clean profile URL.
 - **Phone:** set `profile.phone` to the number intended for public display.
 - **CV:** add `assets/cv/Ibad_Jahangir_CV.pdf` and set `profile.cv` to that relative path.
 - **Photo:** add a real portrait at `assets/images/profile.jpg` and set `profile.photo` in `data.js` to that relative path; the hero portrait card appears only when the path is set.
