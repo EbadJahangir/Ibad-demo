@@ -91,7 +91,7 @@ Only add links, technologies, features, credentials, or project statuses that ca
 - **LinkedIn:** set `profile.linkedin` to the real profile URL.
 - **Phone:** set `profile.phone` to the number intended for public display.
 - **CV:** add `assets/cv/Ibad_Jahangir_CV.pdf` and set `profile.cv` to that relative path.
-- **Photo:** add a real image and implement its display only when supplied.
+- **Photo:** add a real portrait at `assets/images/profile.jpg` and set `profile.photo` in `data.js` to that relative path; the hero portrait card appears only when the path is set.
 - **Certificates:** add real entries to `credentials` and set `showCredentials: true`.
 - **Project screenshots:** add genuine screenshots from the project and update the project visual gallery; current project art is explicitly captioned as concept illustration.
 
