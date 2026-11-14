@@ -2,7 +2,7 @@
 'use strict';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const D=window.PORTFOLIO_DATA;if(!D)return;
-const p=D.profile, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const p=D.profile, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;\nconst photo=$('#profilePhoto');if(photo&&p.photo){photo.src=p.photo;photo.hidden=false;}
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 $$('[data-profile]').forEach(el=>{const v=p[el.dataset.profile];if(v)el.textContent=v;});
 $$('[data-link]').forEach(el=>{const key=el.dataset.link,v=key==='email'?'mailto:'+p.email:key==='phone'?'tel:'+p.phone:p[key];if(v){el.href=v;if(key==='cv')el.hidden=false;}else el.hidden=true;});
