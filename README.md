@@ -20,7 +20,7 @@ Precision Studio uses a deep green-black base, warm ivory typography, and restra
 - Scroll progress, active navigation, reveal transitions, and back-to-top control
 - Email copy action and accessible toast feedback
 - Contact form validates fields and opens the visitor's email application with a pre-filled message; it does not send messages through a backend
-- Conditional LinkedIn, phone, CV, and credentials content
+- Conditional LinkedIn, phone, CV section/navigation, and credentials content\n- Contact column includes a verified location card to keep the layout balanced
 - SEO metadata, Open Graph preview, JSON-LD Person data, and custom 404 page
 
 ## Technologies
