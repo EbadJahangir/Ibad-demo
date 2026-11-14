@@ -106,7 +106,7 @@ The form includes a hidden honeypot and inline validation.
 - **CV:** add `assets/cv/Ibad_Jahangir_CV.pdf` and set `profile.cv` to that relative path.
 - **Photo:** add a real portrait at `assets/images/profile.jpg` and set `profile.photo` in `data.js` to that relative path; the hero portrait card appears only when the path is set.
 - **Certificates:** add real entries to `credentials` and set `showCredentials: true`.
-- **Project screenshots:** add genuine screenshots from the project and update the project visual gallery; current project art is explicitly captioned as concept illustration.
+- **Project screenshots:** place genuine files under `assets/images/`, add their relative paths to the relevant project's `screenshots` array in `data.js`, and the first available image replaces the illustration. The accessible lightbox opens that gallery. Current visuals are explicitly captioned as interface illustrations.
 
 ## Customize colors
 
