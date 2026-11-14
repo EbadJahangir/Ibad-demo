@@ -1,162 +1,35 @@
-/* =========================================================
-   IBAD JAHANGIR — INTERACTION LAYER (vanilla JavaScript)
-   ========================================================= */
 (() => {
-  'use strict';
-  const $ = (s, root=document) => root.querySelector(s);
-  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const touch = matchMedia('(pointer: coarse)').matches;
-
-  // Theme: system preference on first visit, then persist the user's choice.
-  const themeButton = $('#themeToggle');
-  function setTheme(theme) {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem('ij-theme', theme);
-    themeButton?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-    const meta = $('meta[name="theme-color"]');
-    if (meta) meta.content = theme === 'dark' ? '#0A100E' : '#F6F1E7';
-  }
-  setTheme(localStorage.getItem('ij-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-  themeButton?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
-
-  // Intro sequence; skip for reduced-motion users.
-  if (reduced) $('#intro')?.remove();
-  else setTimeout(() => $('#intro')?.remove(), 1050);
-
-  // Typing role.
-  const roleNode = $('#typedRole');
-  const roles = ['AI & Software Developer', 'Aspiring Data Analyst', 'Mathematician', 'Software Product Builder'];
-  if (roleNode && !reduced) {
-    let role=0, char=roles[0].length, deleting=true;
-    const type = () => {
-      const current=roles[role];
-      char += deleting ? -1 : 1;
-      roleNode.textContent=current.slice(0,char);
-      let delay=deleting?42:78;
-      if (!deleting && char===current.length) { deleting=true; delay=1350; }
-      else if (deleting && char===0) { deleting=false; role=(role+1)%roles.length; delay=280; }
-      setTimeout(type,delay);
-    };
-    setTimeout(type,1800);
-  }
-
-  // Scroll state: progress, back-to-top and active section.
-  const progress=$('#progress'), backTop=$('#backTop');
-  const navAnchors=$$('.nav-links a[href^="#"]');
-  const sections=navAnchors.map(a=>$(a.getAttribute('href'))).filter(Boolean);
-  let scrollTick=false;
-  function updateScroll(){
-    const max=document.documentElement.scrollHeight-innerHeight;
-    progress.style.width=(max>0?scrollY/max*100:0)+'%';
-    backTop.classList.toggle('visible',scrollY>520);
-    const marker=scrollY+innerHeight*.34;
-    let active=sections[0];
-    sections.forEach(section=>{if(section.offsetTop<=marker)active=section;});
-    navAnchors.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+active?.id));
-    scrollTick=false;
-  }
-  addEventListener('scroll',()=>{if(!scrollTick){requestAnimationFrame(updateScroll);scrollTick=true;}},{passive:true});
-  updateScroll();
-  backTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
-
-  // Reveal on scroll.
-  const revealNodes=$$('.reveal');
-  if ('IntersectionObserver' in window && !reduced) {
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
-      if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
-    }),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
-    revealNodes.forEach(node=>observer.observe(node));
-  } else revealNodes.forEach(node=>node.classList.add('is-visible'));
-
-  // Mobile navigation.
-  const menuToggle=$('#menuToggle'), navLinks=$('#navLinks');
-  function closeMenu(){navLinks.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open navigation');}
-  menuToggle.addEventListener('click',()=>{
-    const open=menuToggle.getAttribute('aria-expanded')!=='true';
-    menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');
-    navLinks.classList.toggle('open',open);
-    if(open) $('a',navLinks).focus();
-  });
-  navLinks.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
-
-  // Cursor spotlight + magnetic buttons + project tilt (desktop only).
-  if(!touch&&!reduced){
-    addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');},{passive:true});
-    $$('.magnetic').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.transform='translate('+(e.clientX-r.left-r.width/2)*.055+'px,'+(e.clientY-r.top-r.height/2)*.09+'px)';});el.addEventListener('pointerleave',()=>el.style.transform='');});
-    $$('.project-card').forEach(card=>{card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(900px) rotateY('+(x*3)+'deg) rotateX('+(-y*3)+'deg) translateY(-3px)';});card.addEventListener('pointerleave',()=>card.style.transform='');});
-  }
-
-  // Hero canvas: slow Lissajous traces, pauses when hidden/offscreen.
-  const canvas=$('#mathCanvas'), ctx=canvas?.getContext('2d');
-  if(canvas&&ctx&&!reduced){
-    let w=0,h=0,frame=0,raf=0,visible=true;
-    const resize=()=>{const dpr=Math.min(devicePixelRatio||1,1.5);w=canvas.clientWidth;h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);};
-    resize();addEventListener('resize',resize,{passive:true});
-    const draw=()=>{
-      if(!visible||document.hidden)return;
-      ctx.clearRect(0,0,w,h);const dark=document.documentElement.dataset.theme==='dark';
-      ctx.strokeStyle=dark?'rgba(242,184,75,.28)':'rgba(184,116,26,.24)';ctx.lineWidth=1;
-      const cx=w*.52,cy=h*.5,scale=Math.min(w,h)*.29;
-      ctx.beginPath();
-      for(let i=0;i<=520;i++){const t=i/520*Math.PI*2;const x=cx+Math.sin(3*t+frame*.002)*scale*.8;const y=cy+Math.sin(2*t)*Math.cos(1.2*t+frame*.001)*scale*.72;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}
-      ctx.stroke();
-      ctx.fillStyle=dark?'rgba(242,184,75,.55)':'rgba(184,116,26,.55)';
-      for(let i=0;i<5;i++){const t=i/5*Math.PI*2+frame*.001;const x=cx+Math.sin(3*t)*scale*.8,y=cy+Math.sin(2*t)*Math.cos(1.2*t)*scale*.72;ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();}
-      frame++;raf=requestAnimationFrame(draw);
-    };
-    const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible&&!document.hidden)draw();else cancelAnimationFrame(raf);});
-    io.observe(canvas);document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else if(visible)draw();});
-  }
-
-  // Email copy with fallback and accessible toast.
-  const toast=$('#toast');let toastTimer;
-  function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2300);}
-  async function copyEmail(){
-    const email='ibadjahangir8100@gmail.com';
-    try{
-      if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(email);
-      else {const input=document.createElement('textarea');input.value=email;input.style.position='fixed';input.style.opacity='0';document.body.append(input);input.select();const ok=document.execCommand('copy');input.remove();if(!ok)throw new Error('Copy unavailable');}
-      showToast('Email copied to clipboard');
-    }catch{showToast('Copy unavailable — use the email link');}
-  }
-  $('#copyEmail').addEventListener('click',copyEmail);
-
-  // Case studies: keep project status and claims explicit.
-  const projectData={
-    orvexa:{label:'PROJECT 01 / AI WORKSPACE',title:'ORVEXA — AI Workspace',status:'In Development',overview:'An AI-powered workspace concept designed to bring intelligent assistance and productivity capabilities together in one environment.',stack:'The public GitHub repositories available for this portfolio review did not include an ORVEXA repository. A verified technology stack and module implementation status could not be confirmed, so no stack or completed-module claims are made here.',implemented:['Product direction and workspace concept'],developing:['Overall AI workspace project'],planned:['AI Chat','Document Management','Research Workspace','Task Management','Automations','AI Agents','Knowledge Base','Settings'],link:null},
-    hms:{label:'PROJECT 02 / HOSPITAL SOFTWARE',title:'Hospital Management System',status:'Implemented modules documented',overview:'A database-driven hospital management application designed to organize patient records, doctors, departments, appointments, and prescriptions.',stack:'Verified from the Medicare-HMS repository README: Python, Flask, PostgreSQL, vanilla JavaScript (ES modules), and pytest. The repository is private, so no public repository button is displayed.',implemented:['Authentication and role-based access','Patients, Doctors and Departments','Appointments and Prescriptions','Billing and payment receipts','Pharmacy and stock management','Reports, CSV export and audit log','Dashboard'],developing:[],planned:[],link:null}
-  };
-  const dialog=$('#caseDialog'),dialogContent=$('#dialogContent');
-  function openCase(key){
-    const p=projectData[key];if(!p)return;
-    const list=(title,items)=>items.length?'<h3>'+title+'</h3><ul>'+items.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'';
-    dialogContent.innerHTML='<p class="section-label">// '+p.label+'</p><h2 id="dialogTitle">'+p.title+'</h2><span class="dialog-status">'+p.status+'</span><h3>Overview</h3><p>'+p.overview+'</p><h3>Verified technology & status</h3><p>'+p.stack+'</p>'+list('Implemented / documented',p.implemented)+list('In development',p.developing)+list('Planned / concept modules',p.planned)+'<div class="dialog-actions"><a href="https://github.com/EbadJahangir" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a><a href="mailto:ibadjahangir8100@gmail.com">Discuss this project ↗</a></div>';
-    dialog.showModal();$('#dialogClose').focus();
-  }
-  $$('.project-card').forEach(card=>{card.addEventListener('click',()=>openCase(card.dataset.project));card.addEventListener('keydown',e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCase(card.dataset.project);}});});
-  $('#dialogClose').addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
-
-  // Command palette with keyboard navigation and focus restoration.
-  const palette=$('#palette'),paletteInput=$('#paletteInput'),paletteItems=$('#paletteItems');
-  const commands=[
-    ...[['Home','#home'],['About','#about'],['Skills','#skills'],['Projects','#projects'],['Education','#education'],['Interests','#interests'],['Contact','#contact']].map(([label,href])=>({label,detail:'Go to section',run:()=>$(href).scrollIntoView({behavior:reduced?'auto':'smooth'})})),
-    {label:'Copy email address',detail:'Clipboard',run:copyEmail},
-    {label:'Open GitHub profile',detail:'New tab',run:()=>window.open('https://github.com/EbadJahangir','_blank','noopener,noreferrer')},
-    {label:'Toggle color theme',detail:'Appearance',run:()=>themeButton.click()}
-  ];
-  let filtered=commands,selected=0,previousFocus=null;
-  function renderCommands(){paletteItems.innerHTML='';filtered.forEach((cmd,i)=>{const b=document.createElement('button');b.className='palette-item'+(i===selected?' selected':'');b.innerHTML='<span></span><small></small>';b.querySelector('span').textContent=cmd.label;b.querySelector('small').textContent=cmd.detail;b.addEventListener('click',()=>chooseCommand(i));paletteItems.append(b);});}
-  function chooseCommand(i){const cmd=filtered[i];if(!cmd)return;palette.close();cmd.run();previousFocus?.focus?.();}
-  function openPalette(){previousFocus=document.activeElement;filtered=commands;selected=0;paletteInput.value='';renderCommands();palette.showModal();paletteInput.focus();}
-  $('#openPalette').addEventListener('click',openPalette);
-  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!palette.open)openPalette();}if(!palette.open)return;if(e.key==='ArrowDown'){e.preventDefault();selected=(selected+1)%filtered.length;renderCommands();}if(e.key==='ArrowUp'){e.preventDefault();selected=(selected-1+filtered.length)%filtered.length;renderCommands();}if(e.key==='Enter'){e.preventDefault();chooseCommand(selected);}});
-  paletteInput.addEventListener('input',()=>{const q=paletteInput.value.toLowerCase();filtered=commands.filter(c=>c.label.toLowerCase().includes(q)||c.detail.toLowerCase().includes(q));selected=0;renderCommands();});
-  palette.addEventListener('close',()=>previousFocus?.focus?.());
-  renderCommands();
-
-  // Footer year.
-  $('#year').textContent=new Date().getFullYear();
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const D=window.PORTFOLIO_DATA;if(!D)return;
+const p=D.profile, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+$$('[data-profile]').forEach(el=>{const v=p[el.dataset.profile];if(v)el.textContent=v;});
+$$('[data-link]').forEach(el=>{const key=el.dataset.link,v=key==='email'?'mailto:'+p.email:key==='phone'?'tel:'+p.phone:p[key];if(v){el.href=v;if(key==='cv')el.hidden=false;}else el.hidden=true;});
+if(p.linkedin){const nav=document.createElement('a');nav.href=p.linkedin;nav.target='_blank';nav.rel='noopener noreferrer';nav.textContent='LinkedIn';$('#navLinks').insertBefore(nav,$('#themeToggle'));}
+$('#aboutCopy').innerHTML=D.about.map((x,i)=>'<p'+(i===0?' class="lead"':'')+'>'+esc(x)+'</p>').join('');
+$('#skillsGrid').innerHTML=D.skills.map(s=>'<article class="skill-card reveal"><span class="skill-code">'+esc(s.code)+'</span><h3>'+esc(s.title)+'</h3><p>'+esc(s.description)+'</p><div class="skill-tags">'+s.items.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div></article>').join('');
+$('#capabilityGrid').innerHTML=D.capabilities.map((c,i)=>'<article class="capability-card reveal"><span class="cap-number">0'+(i+1)+' / CAPABILITY</span><h3>'+esc(c.title)+'</h3><p>'+esc(c.description)+'</p><a href="#projects" data-project-jump="'+esc(c.project)+'">Seen in: '+esc(c.seen)+' ↗</a></article>').join('');
+$('#projectsList').innerHTML=D.projects.map(pr=>'<article class="project-block reveal" id="project-'+esc(pr.id)+'"><div class="project-art '+(pr.visual==='hospital'?'hospital':'')+'"><div class="art-ui"><div class="art-ui-top"><span>'+esc(pr.name.toUpperCase())+' / WORKSPACE</span><b>●</b></div><div class="art-ui-grid"><i></i><i></i><i></i></div><div class="art-ui-lines"><i></i><i></i><i></i></div></div><span class="art-label">CONCEPT ILLUSTRATION / '+esc(pr.number)+'</span></div><div class="project-content"><div class="project-meta"><span>PROJECT '+esc(pr.number)+'</span><span class="status '+esc(pr.statusType)+'">'+esc(pr.status)+'</span></div><h3>'+esc(pr.name)+'</h3><p class="project-subtitle">'+esc(pr.subtitle)+'</p><p>'+esc(pr.description)+'</p><div class="project-tags">'+pr.stack.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div><div class="project-actions"><button class="text-action" data-open-case="'+esc(pr.id)+'">View Case Study ↗</button>'+(pr.github?'<a class="text-action" href="'+esc(pr.github)+'" target="_blank" rel="noopener noreferrer">GitHub ↗</a>':'')+(pr.live?'<a class="text-action" href="'+esc(pr.live)+'" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>':'')+'</div></div></article>').join('');
+const e=D.education;$('#educationCard').innerHTML='<div class="edu-mark">BS</div><div><span class="skill-code">ACADEMIC BACKGROUND / 01</span><h3>'+esc(e.degree)+'</h3><p class="edu-institution">'+esc(e.institution)+'</p><p>'+esc(e.department)+' · '+esc(e.location)+'</p></div><span class="education-meta">'+esc(e.semester)+'</span>';
+$('#interestGrid').innerHTML=D.interests.map((x,i)=>'<article class="interest-item reveal" tabindex="0"><span>0'+(i+1)+'</span><div><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join('');
+if(D.showCredentials&&D.credentials.length){$('#credentials').hidden=false;$('#credentialsGrid').innerHTML=D.credentials.map(c=>'<article><h3>'+esc(c.title)+'</h3><p>'+esc(c.issuer)+'</p></article>').join('');}
+const navAnchors=$$('.nav-links a[href^="#"]'), sections=navAnchors.map(a=>$(a.getAttribute('href'))).filter(Boolean);
+const progress=$('#progress'),back=$('#backTop');let ticking=false;
+function scrollState(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?scrollY/max*100:0)+'%';back.classList.toggle('visible',scrollY>480);let active=sections[0];sections.forEach(s=>{if(s.offsetTop<=scrollY+innerHeight*.35)active=s;});navAnchors.forEach(a=>a.classList.toggle('active',a.hash==='#'+active?.id));ticking=false;}
+addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(scrollState);ticking=true;}},{passive:true});scrollState();back.addEventListener('click',()=>scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
+const reveal=()=>{$$('.reveal').forEach(n=>{if(n.getBoundingClientRect().top<innerHeight*.9)n.classList.add('is-visible');});};
+if('IntersectionObserver'in window&&!reduced){const io=new IntersectionObserver(entries=>entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('is-visible');io.unobserve(en.target);}}),{threshold:.1});$$('.reveal').forEach(n=>io.observe(n));}else reveal();
+const themeBtn=$('#themeToggle');function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('ij-theme',t);}catch(e){}themeBtn.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');$('meta[name="theme-color"]').content=t==='dark'?'#0A100E':'#F6F1E7';}themeBtn.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+const menu=$('#menuToggle'),links=$('#navLinks');function closeMenu(){links.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');}menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');links.classList.toggle('open',open);if(open)$('a',links)?.focus();});links.addEventListener('click',ev=>{if(ev.target.closest('a'))closeMenu();});document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeMenu();});
+const toast=$('#toast');let toastTimer;function notify(s){toast.textContent=s;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200);}
+async function copyEmail(){try{if(navigator.clipboard&&isSecureContext)await navigator.clipboard.writeText(p.email);else{const t=document.createElement('textarea');t.value=p.email;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();if(!document.execCommand('copy'))throw Error();t.remove();}notify('Email copied to clipboard');}catch{notify('Copy unavailable — use the email link');}}
+$('#copyEmail').addEventListener('click',copyEmail);
+const dialog=$('#caseDialog'),content=$('#dialogContent');function openCase(id){const pr=D.projects.find(x=>x.id===id);if(!pr)return;const section=(title,items)=>items?.length?'<h3>'+title+'</h3><ul>'+items.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'';content.innerHTML='<p class="section-label">// PROJECT '+esc(pr.number)+' / CASE STUDY</p><h2 id="dialogTitle">'+esc(pr.name)+' — '+esc(pr.subtitle)+'</h2><span class="dialog-status">'+esc(pr.status)+'</span><h3>The problem / product direction</h3><p>'+esc(pr.problem||pr.overview)+'</p><h3>Overview</h3><p>'+esc(pr.overview)+'</p>'+section('Core capabilities — documented',pr.implemented)+section('In development',pr.developing)+section('Planned / concept modules',pr.planned)+'<h3>How it works</h3><ol>'+pr.workflow.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol><h3>Technology</h3><p>'+pr.stack.map(esc).join(' · ')+'</p><div class="dialog-actions"><a href="'+p.github+'" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a><a href="mailto:'+p.email+'?subject='+encodeURIComponent('Project discussion: '+pr.name)+'">Discuss this project ↗</a></div>';dialog.showModal();$('#dialogClose').focus();}
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-open-case]');if(b)openCase(b.dataset.openCase);const j=ev.target.closest('[data-project-jump]');if(j){ev.preventDefault();$('#project-'+j.dataset.projectJump)?.scrollIntoView({behavior:reduced?'auto':'smooth'});}});
+$('#dialogClose').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',ev=>{if(ev.target===dialog)dialog.close();});
+$('#messageForm').addEventListener('submit',ev=>{ev.preventDefault();const form=ev.currentTarget,values=Object.fromEntries(new FormData(form).entries());let valid=true;for(const key of ['name','email','subject','message']){const field=form.elements[key],error=$('[data-error="'+key+'"]');let message='';if(!String(values[key]||'').trim())message='This field is required.';else if(key==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))message='Enter a valid email address.';error.textContent=message;field.setAttribute('aria-invalid',String(!!message));if(message)valid=false;}if(!valid){form.querySelector('[aria-invalid="true"]')?.focus();return;}const body='Name: '+values.name+'\nEmail: '+values.email+'\n\n'+values.message;location.href='mailto:'+p.email+'?subject='+encodeURIComponent(values.subject)+'&body='+encodeURIComponent(body);});
+const palette=$('#palette'),input=$('#paletteInput'),items=$('#paletteItems');const commands=[...['home','about','skills','capabilities','projects','education','interests','contact'].map(id=>({label:'Go to '+id,run:()=>$('#'+id).scrollIntoView({behavior:reduced?'auto':'smooth'})})),{label:'Copy email address',run:copyEmail},{label:'Open GitHub profile',run:()=>window.open(p.github,'_blank','noopener,noreferrer')},{label:'Toggle color theme',run:()=>themeBtn.click()}];let filtered=commands,selected=0,prior=null;function render(){items.innerHTML='';filtered.forEach((c,i)=>{const b=document.createElement('button');b.className='palette-item'+(i===selected?' selected':'');b.innerHTML='<span></span><small>ENTER</small>';b.querySelector('span').textContent=c.label;b.addEventListener('click',()=>choose(i));items.append(b);});}function choose(i){const c=filtered[i];if(!c)return;palette.close();c.run();prior?.focus?.();}function openPalette(){prior=document.activeElement;filtered=commands;selected=0;input.value='';render();palette.showModal();input.focus();}$('#openPalette').addEventListener('click',openPalette);document.addEventListener('keydown',ev=>{if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='k'){ev.preventDefault();if(!palette.open)openPalette();}if(!palette.open)return;if(ev.key==='ArrowDown'){ev.preventDefault();selected=(selected+1)%Math.max(filtered.length,1);render();}if(ev.key==='ArrowUp'){ev.preventDefault();selected=(selected-1+filtered.length)%Math.max(filtered.length,1);render();}if(ev.key==='Enter'){ev.preventDefault();choose(selected);}});input.addEventListener('input',()=>{filtered=commands.filter(c=>c.label.toLowerCase().includes(input.value.toLowerCase()));selected=0;render();});palette.addEventListener('close',()=>prior?.focus?.());render();
+const roles=['AI & Software Developer','Aspiring Data Analyst','Mathematician','Software Product Builder'];const role=$('#typedRole');if(!reduced){let r=0,n=roles[0].length,del=true;const type=()=>{n+=del?-1:1;role.textContent=roles[r].slice(0,n);let wait=del?38:68;if(!del&&n===roles[r].length){del=true;wait=1300;}else if(del&&n===0){del=false;r=(r+1)%roles.length;wait=250;}setTimeout(type,wait);};setTimeout(type,1600);}
+$('#year').textContent=new Date().getFullYear();
 })();
