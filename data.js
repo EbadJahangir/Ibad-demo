@@ -16,7 +16,7 @@ window.PORTFOLIO_DATA = {
   },
   about: [
     "I am Ibad Jahangir, an AI & Software Developer and Mathematician with a strong interest in Artificial Intelligence, Software Development, and Data Analytics.",
-    "With a background in Mathematics, I enjoy exploring the connection between logical reasoning, analytical thinking, and modern technology.",
+    "I enjoy exploring the connection between logical reasoning, analytical thinking, and modern technology.",
     "I work on building practical software applications, experimenting with AI-powered solutions, developing backend systems, and working with databases.",
     "My goal is to transform ideas into meaningful digital products while continuously exploring emerging technologies and improving my technical capabilities."
   ],
