@@ -9,10 +9,10 @@ window.PORTFOLIO_DATA = {
     location: "Multan, Pakistan",
     email: "ibadjahangir8100@gmail.com",
     github: "https://github.com/EbadJahangir",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/ibad-jahangir-a57148356",
     phone: "",
     photo: "",
-    cv: ""
+    cv: "",\n    availability: "Open to opportunities, internships, freelance projects and collaborations in AI, software and data."
   },
   about: [
     "I am Ibad Jahangir, an AI & Software Developer and Mathematician with a strong interest in Artificial Intelligence, Software Development, and Data Analytics.",
@@ -47,12 +47,12 @@ window.PORTFOLIO_DATA = {
     {
       id: "hms", number: "02", name: "Hospital Management", subtitle: "System",
       description: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, and reporting workflows.",
-      status: "Implemented modules documented", statusType: "built",
+      status: "Working", statusType: "built",
       stack: ["Python","Flask","PostgreSQL","Vanilla JavaScript","Pytest"],
-      overview: "A full-stack web application for a small hospital. Flask serves the JSON API and frontend, while PostgreSQL stores structured application data. The repository documentation describes role-aware workflows across clinical administration and operational modules.",
+      overview: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, and stock workflows.",
       problem: "A hospital needs consistent digital workflows for patient information, appointments, prescriptions, payments, medicine stock, and operational reporting.",
       workflow: ["Staff enter and manage records","Flask validates requests and applies business rules","PostgreSQL stores transactional data","Role-scoped views and reports present information"],
-      implemented: ["Session authentication, CSRF protection and role-based access","Patients, doctors and departments","Appointments with double-booking prevention","Prescriptions linked to appointments","Appointment-based billing and payment receipts","Pharmacy, stock movements and point-of-sale sales","Dashboard, reports, CSV export and audit log"],
+      implemented: ["Dashboard","Patients","Doctors","Departments","Appointments","Prescriptions","Billing","Pharmacy Management","Stock Management"],
       developing: [],
       planned: [],
       github: "", live: "", visual: "hospital"
@@ -70,5 +70,5 @@ window.PORTFOLIO_DATA = {
     ["Mathematical Problem-Solving","Applying structured reasoning to complex questions."]
   ],
   credentials: [],
-  showCredentials: false
+  showCredentials: false,\n  formEndpoint: ""
 };
