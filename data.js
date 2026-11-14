@@ -43,7 +43,7 @@ window.PORTFOLIO_DATA = {
       implemented: ["Product direction and workspace concept"],
       developing: ["Overall product development"],
       planned: ["AI Chat","Document Management","Research Workspace","Task Management","Automations","AI Agents","Knowledge Base","Settings"],
-      github: "", live: "", visual: "workspace"
+      github: "", live: "", screenshots: [], visual: "workspace"
     },
     {
       id: "hms", number: "02", name: "Hospital Management", subtitle: "System",
@@ -56,7 +56,7 @@ window.PORTFOLIO_DATA = {
       implemented: ["Dashboard","Patients","Doctors","Departments","Appointments","Prescriptions","Billing","Pharmacy Management","Stock Management"],
       developing: [],
       planned: [],
-      github: "", live: "", visual: "hospital"
+      github: "", live: "", screenshots: [], visual: "hospital"
     }
   ],
   education: { degree: "BS Mathematics", institution: "Bahauddin Zakariya University (BZU)", department: "Department of Mathematics", location: "Multan, Pakistan", semester: "5th Semester" },
