@@ -29,7 +29,7 @@ window.PORTFOLIO_DATA = {
   capabilities: [
     { title: "AI-Powered Applications", description: "Exploring practical AI-assisted tools and workspace concepts that bring useful capabilities into a unified product experience.", project: "orvexa", seen: "ORVEXA" },
     { title: "Backend & Database Systems", description: "Building Flask-based application back ends and working with relational PostgreSQL data, validation, and business rules.", project: "hms", seen: "Hospital Management System" },
-    { title: "Data-Driven Software", description: "Organizing records and operational information into structured workflows, reports, and useful application views.", project: "hms", seen: "Hospital Management System" }
+    { title: "Data-Driven Software", description: "Organizing records and operational information into structured workflows, operational reports, and role-scoped application views.", project: "hms", seen: "Hospital Management System" }
   ],
   projects: [
     {
@@ -40,10 +40,9 @@ window.PORTFOLIO_DATA = {
       overview: "ORVEXA is an AI workspace product being developed as a unified environment for intelligent assistance and productivity workflows. Its repository and implementation details were not available for independent verification during this portfolio update.",
       problem: "The product direction explores how related AI and productivity workflows could be organized within one coherent workspace.",
       workflow: ["Explore product needs","Design workspace workflows","Develop and integrate capabilities","Refine the product"],
-      implemented: ["Product direction and workspace concept"],
       developing: ["Overall product development"],
       planned: ["AI Chat","Document Management","Research Workspace","Task Management","Automations","AI Agents","Knowledge Base","Settings"],
-      github: "", live: "", screenshots: [], visual: "workspace"
+      repoUrl: "", live: "", screenshots: [], visual: "workspace"
     },
     {
       id: "hms", number: "02", name: "Hospital Management", subtitle: "System",
@@ -53,10 +52,10 @@ window.PORTFOLIO_DATA = {
       overview: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, and stock workflows.",
       problem: "A hospital needs consistent digital workflows for patient information, appointments, prescriptions, payments, medicine stock, and operational reporting.",
       workflow: ["Staff enter and manage records","Flask validates requests and applies business rules","PostgreSQL stores transactional data","Role-scoped views and reports present information"],
-      implemented: ["Dashboard","Patients","Doctors","Departments","Appointments","Prescriptions","Billing","Pharmacy Management","Stock Management"],
+      implemented: ["Dashboard","Patients","Doctors","Departments","Appointments","Prescriptions","Billing","Pharmacy Management","Stock Management","Reporting","Role-scoped views"],
       developing: [],
       planned: [],
-      github: "", live: "", screenshots: [], visual: "hospital"
+      repoUrl: "", live: "", screenshots: [], visual: "hospital"
     }
   ],
   education: { degree: "BS Mathematics", institution: "Bahauddin Zakariya University (BZU)", department: "Department of Mathematics", location: "Multan, Pakistan", semester: "5th Semester" },
