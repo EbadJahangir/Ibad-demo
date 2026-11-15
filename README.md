@@ -43,7 +43,7 @@ Ibad-demo/
 
 `data.js` is the source of truth for JavaScript-rendered content. The static HTML fallback in `index.html` is retained for JavaScript-disabled or `data.js`-failure cases; keep skills, capabilities, projects, module lists, education, interests, profile links, and availability in sync. When JavaScript loads successfully, the renderer replaces fallback containers rather than appending duplicate content.
 - `profile`: identity, links, availability, optional photo/CV/phone
-- `about`: four About paragraphs
+- `about`: three About paragraphs
 - `skills`: three skill categories and tags
 - `capabilities`: What I Build cards and project references
 - `projects`: descriptions, statuses, stack, case-study detail, modules, optional `repoUrl`, live links, and screenshots. Leave `repoUrl` empty until a real project repository exists.
@@ -64,7 +64,7 @@ Keep claims factual. ORVEXA modules are listed as planned; don't mark them imple
 
 ## Current QA status
 
-Source-level checks are in progress for this update. Browser/device testing and Lighthouse scores are not claimed until actually run.
+Source-level JavaScript parsing, HTML ID/anchor checks, project-content checks, and metadata checks have been run for this update. The `node --check` command and browser/device testing have not been run in this environment; no Lighthouse score is claimed.
 
 ## Run locally
 Open `index.html` or run:
@@ -76,7 +76,7 @@ Visit http://localhost:8000.
 ## Deploy
 ### GitHub Pages
 Repository Settings → Pages → Deploy from a branch → `main` → `/(root)`.  
-Canonical URL is currently `https://ebadjahangir.github.io/Ibad-demo/`. Update canonical, sitemap, and social metadata if domain/repository URL changes.
+Primary URL is `https://ebadjahangir.github.io/Ibad-demo/`. Keep the canonical URL, sitemap URL, `og:url`, `og:image`, and `twitter:image` on this same primary domain; update all of them together if a custom domain is added.
 
 ### Vercel
 Import the repository as **Other** / static. No build command; output directory is the repository root.
