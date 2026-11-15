@@ -26,7 +26,7 @@ function scrollState(){const max=document.documentElement.scrollHeight-innerHeig
 addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(scrollState);ticking=true;}},{passive:true});scrollState();back.addEventListener('click',()=>scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
 const reveal=()=>{$$('.reveal').forEach(n=>{if(n.getBoundingClientRect().top<innerHeight*.9)n.classList.add('is-visible');});};
 if('IntersectionObserver'in window&&!reduced){const io=new IntersectionObserver(entries=>entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('is-visible');io.unobserve(en.target);}}),{threshold:.1});$$('.reveal').forEach(n=>io.observe(n));}else reveal();
-const themeBtn=$('#themeToggle');function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('ij-theme-v2',t);}catch(e){}themeBtn.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');$('meta[name="theme-color"]').content=t==='dark'?'#0A100E':'#F6F1E7';}themeBtn.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+const themeBtn=$('#themeToggle');function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('ij-theme-v2',t);}catch(e){}themeBtn.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');$('meta[name="theme-color"]').forEach(meta=>{meta.content=t==='dark'?'#08100D':'#F6F1E7';});}themeBtn.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
 const menu=$('#menuToggle'),links=$('#navLinks');
 function closeMenu(returnFocus=true){
   if(menu.getAttribute('aria-expanded')!=='true')return;
