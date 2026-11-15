@@ -145,3 +145,14 @@ html{scrollbar-color:var(--gold-deep) var(--surface-1);scrollbar-width:thin}
 ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--surface-1)}::-webkit-scrollbar-thumb{background:var(--gold-deep);border:3px solid var(--surface-1);border-radius:99px}
 @media (hover:hover) and (pointer:fine){.skill-card:hover,.capability-card:hover,.interest-item:hover{border-color:var(--gold-soft);box-shadow:0 16px 40px rgba(0,0,0,.12);transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Motion accents: intentionally quiet and reduced-motion safe */
+@keyframes statusPulse{0%,100%{box-shadow:0 0 0 0 var(--mint-soft)}50%{box-shadow:0 0 0 6px transparent}}
+.availability-line .status-dot{animation:statusPulse 2.6s ease-out infinite}
+.hero-visual .visual-code{animation:floatCode 8s ease-in-out infinite}
+.hero-visual .visual-ai{animation:floatCard 7s ease-in-out infinite}
+@keyframes floatCode{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.field-error{display:block;color:var(--danger);font-size:12px;min-height:0}
+input[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--danger)}
+@media(prefers-reduced-motion:reduce){.availability-line .status-dot,.hero-visual .visual-code,.hero-visual .visual-ai{animation:none}}
