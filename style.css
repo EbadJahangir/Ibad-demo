@@ -297,3 +297,89 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--danger)}
   .project-content h3 { font-size:32px!important; }
   .project-features li { align-items:flex-start; gap:8px; }
 }
+/* =========================================================
+   PROJECTS LAYOUT: two cards side by side on desktop,
+   inside each card: heading -> picture -> details.
+   Mobile: one card below the other, same inner order.
+   ========================================================= */
+
+/* Desktop / large tablet: two equal columns, HMS left, ORVEXA right */
+.projects-list{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(20px,3vw,40px)!important;
+  align-items:stretch!important;
+}
+
+/* Each project is one card; its parts stack vertically */
+.projects-list>.project-block.project-block,
+.projects-list>.project-block.project-reverse{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  align-items:stretch!important;
+  grid-template-columns:none!important;
+  margin:0!important;
+  padding:clamp(18px,2.2vw,28px)!important;
+  border:1px solid var(--border)!important;
+  border-radius:16px!important;
+  background:var(--surface)!important;
+}
+
+/* Flatten .project-content so its children can be re-ordered around the picture */
+.projects-list>.project-block>.project-content{display:contents!important}
+
+/* Default: everything inside project-content goes BELOW the picture */
+.projects-list>.project-block>.project-content>*{order:3!important}
+
+/* 1) Heading group (category + status, title, subtitle) goes FIRST */
+.projects-list>.project-block>.project-content>.project-meta,
+.projects-list>.project-block>.project-content>h3,
+.projects-list>.project-block>.project-content>.project-subtitle{order:1!important}
+
+.projects-list>.project-block>.project-content>.project-meta{margin:0 0 14px!important}
+.projects-list>.project-block>.project-content>h3{
+  margin:0 0 4px!important;
+  font-size:clamp(24px,2.4vw,34px)!important;
+  line-height:1.15!important;
+}
+.projects-list>.project-block>.project-content>.project-subtitle{margin:0 0 18px!important}
+
+/* 2) Picture in the middle: identical size and ratio for both projects */
+.projects-list>.project-block.project-block>.project-art,
+.projects-list>.project-block.project-reverse>.project-art{
+  order:2!important;
+  width:100%!important;
+  min-height:0!important;
+  aspect-ratio:16/10!important;
+  margin:0 0 22px!important;
+  flex:none!important;
+}
+
+/* 3) Details below the picture */
+.projects-list>.project-block>.project-content>p{font-size:15px!important;line-height:1.65!important}
+.projects-list>.project-block>.project-content>.project-features{margin:18px 0!important}
+
+/* Button stays at the bottom so both cards end on the same line */
+.projects-list>.project-block>.project-content>.project-actions{
+  margin-top:auto!important;
+  padding-top:18px!important;
+}
+
+/* Tablet and mobile: one column, HMS first, ORVEXA below */
+@media(max-width:900px){
+  .projects-list{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:28px!important;
+  }
+}
+
+/* Small phones: simpler, larger-looking preview inside the picture */
+@media(max-width:600px){
+  .projects-list>.project-block.project-block>.project-art,
+  .projects-list>.project-block.project-reverse>.project-art{aspect-ratio:4/3!important}
+  .mock-interface{grid-template-columns:68px minmax(0,1fr)!important;gap:8px!important}
+  .mock-sidebar span:nth-of-type(n+5),.mock-stats{display:none!important}
+  .projects-list>.project-block>.project-content>.project-actions .text-action,
+  .projects-list>.project-block>.project-content>.project-actions .btn{min-height:44px}
+}
