@@ -36,7 +36,9 @@ Ibad-demo/
 ├── sitemap.xml
 └── assets/
     ├── favicon/favicon.svg
-    └── images/og-image.svg
+    └── images/
+        ├── og-image.svg
+        └── og-image.png
 ```
 
 ## Edit content in data.js
