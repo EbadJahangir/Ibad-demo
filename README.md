@@ -1,142 +1,93 @@
-# Ibad Jahangir — Precision Studio Portfolio
+# Ibad Jahangir — Personal Portfolio
 
-A responsive personal portfolio for **Ibad Jahangir**, an AI & Software Developer, Aspiring Data Analyst, and Mathematician based in Multan, Pakistan.
+A static, responsive portfolio for **Ibad Jahangir** — AI & Software Developer | Aspiring Data Analyst | Mathematician.
 
-**Tagline:** Where Mathematics Meets Technology.
+**Tagline:** Where Mathematics Meets Technology.  
+**Location:** Multan, Pakistan.
 
-## Design direction
-
-Precision Studio uses a deep green-black base, warm ivory typography, and restrained gold accents. The visual language is based on software interfaces, structured data, dashboards, and product workflows rather than mathematical equations or blackboard motifs.
+## Stack
+HTML5, CSS3, and Vanilla JavaScript only. No framework, build step, npm dependency, or backend is required. Google Fonts are optional external font requests; local fallback stacks remain available.
 
 ## Features
-
-- Dark and light themes; system preference on first visit and saved user choice
-- Responsive navigation, skip link, keyboard focus styles, and reduced-motion support
-- Animated professional role headline and lightweight hero network canvas (paused off-screen/hidden tab; static with reduced motion)
-- Data-driven content in `data.js`
-- Editorial section headings, 3-column equal-height skills, What I Build, alternating project case studies, education, and interests
-- Custom CSS interface illustrations for ORVEXA and HMS (not screenshots)\n- Case-study dialogs with implementation/development/planned status distinctions\n- Mobile navigation focus trap, keyboard palette, and reduced-motion-aware canvas
-- Keyboard command palette (Ctrl/Cmd + K)
-- Scroll progress, active navigation, reveal transitions, and back-to-top control
-- Email copy action and accessible toast feedback
-- Contact form validates fields and uses a pre-filled mailto by default; optional Formspree POST mode is supported
-- Verified GitHub/LinkedIn/email links, availability statement, and location card
-- Conditional phone, CV, and credentials content (absent by default)
-- Contact column includes a verified location card to keep the layout balanced
-- SEO metadata, Open Graph preview, JSON-LD Person data, and custom 404 page
-
-## Technologies
-
-- HTML5
-- CSS3 (custom properties, responsive layout, reduced-motion handling)
-- Vanilla JavaScript (no framework, backend, paid API, or API key)
-- Inline CSS illustrations
-
-Google Fonts (Playfair Display, Inter, JetBrains Mono) are loaded remotely with system fallbacks.
+- Green-black + gold editorial design with dark/light themes and persisted preference
+- Early theme preference initialization to reduce theme flash
+- Responsive navigation, skip link, visible keyboard focus, reduced-motion support
+- Animated role text and lightweight hero network canvas
+- Data-driven profile, skills, capabilities, projects, education, and interests in `data.js`
+- CSS interface illustrations labelled as illustrations (not screenshots)
+- ORVEXA clearly marked **In Development**; modules are **Planned**
+- HMS case study and documented module list
+- Native case-study and gallery dialogs, command palette (Ctrl/Cmd+K), copy-email toast
+- Scroll progress, active navigation, reveal transitions, and back-to-top
+- Contact form validation, honeypot, mailto default, optional Formspree
+- Conditional CV, phone, and credentials content
+- SEO metadata, canonical URL, Open Graph/Twitter tags, JSON-LD, favicon, 404, robots, sitemap
 
 ## Project structure
-
 ```
-portfolio/
+Ibad-demo/
 ├── index.html
 ├── style.css
 ├── script.js
 ├── data.js
 ├── README.md
 ├── 404.html
+├── robots.txt
+├── sitemap.xml
 └── assets/
-    ├── favicon/
-    │   └── favicon.svg
-    └── images/
-        └── og-image.svg
+    ├── favicon/favicon.svg
+    └── images/og-image.svg
 ```
 
-## Verified project notes
+## Edit content in data.js
+- `profile`: identity, links, availability, optional photo/CV/phone
+- `about`: four About paragraphs
+- `skills`: three skill categories and tags
+- `capabilities`: What I Build cards and project references
+- `projects`: descriptions, statuses, stack, case-study detail, modules, links, screenshots
+- `education`: degree, institution, department, location, semester
+- `interests`: eight interests
+- `credentials` and `showCredentials`: optional credentials
+- `formEndpoint`: optional Formspree endpoint (empty means mailto)
 
-### ORVEXA — AI Workspace
+Keep claims factual. ORVEXA modules are listed as planned; don't mark them implemented without evidence.
 
-ORVEXA is described as an AI workspace product in development. No ORVEXA repository was present among the repositories accessible through the connected GitHub account during this update. Therefore, its stack and module-by-module implementation status could not be independently verified. The portfolio labels the workspace as in development and lists possible modules as planned concepts.
-
-### Hospital Management System
-
-The private `EbadJahangir/Medicare-HMS` repository was inspected on branch `feature/full-implementation`. Its README documents Flask (Python), PostgreSQL, vanilla JavaScript ES modules, and pytest. Documented areas include authentication, patients, doctors, departments, appointments, prescriptions, billing, pharmacy, reports, dashboard, and audit logging. The repository is private, so no public project repository link is shown.
-
-The repository README documents 81 automated tests. This portfolio update did not execute those tests or independently run the application, so no test pass or live-deployment claim is made here.
+## Optional assets and integrations
+- **CV:** add `assets/cv/Ibad_Jahangir_CV.pdf`, then set `profile.cv` to its relative path. The CV CTA appears when the file is detected.
+- **Portrait:** add a real portrait under `assets/images/` and set `profile.photo`.
+- **Screenshots:** add real project images under `assets/images/`, then add relative paths to a project's `screenshots` array. The existing gallery/lightbox will use them. Current project art is illustrative UI, not a product screenshot.
+- **Phone:** set `profile.phone` only if you want it public.
+- **Credentials:** add genuine entries and set `showCredentials: true`.
+- **Formspree:** create a form at [Formspree](https://formspree.io/), copy its endpoint into `formEndpoint` in `data.js`, then test delivery. This is a one-line configuration change. Empty endpoint uses a prefilled mailto and does not send from the website.
 
 ## Run locally
-
-Open `index.html` in a modern browser, or run a local server from this folder:
-
+Open `index.html` or run:
 ```bash
 python -m http.server 8000
 ```
+Visit http://localhost:8000.
 
-Then visit http://localhost:8000.
+## Deploy
+### GitHub Pages
+Repository Settings → Pages → Deploy from a branch → `main` → `/(root)`.  
+Canonical URL is currently `https://ebadjahangir.github.io/Ibad-demo/`. Update canonical, sitemap, and social metadata if domain/repository URL changes.
 
-## Edit your content
+### Vercel
+Import the repository as **Other** / static. No build command; output directory is the repository root.
 
-Most portfolio content lives in `data.js`:
+## Manual QA checklist
+- [ ] Open deployed site and verify all sections/links
+- [ ] Test widths 360, 390, 768, 1024, 1280, and 1536px (no horizontal overflow)
+- [ ] Toggle themes; verify saved preference and contrast
+- [ ] Test mobile menu using keyboard and touch
+- [ ] Open/close case study and gallery with Escape, backdrop, and close button; verify focus returns
+- [ ] Use command palette with Ctrl/Cmd+K, arrows, Enter, Escape
+- [ ] Test copy email and toast
+- [ ] Submit empty/invalid/valid form; test mailto and configured Formspree delivery
+- [ ] Test with reduced motion enabled
+- [ ] Verify CV appears only when PDF exists
+- [ ] Run Lighthouse mobile and accessibility audit
+- [ ] Confirm GitHub Pages deployment and canonical URL
 
-- Profile details and links: `profile`
-- About paragraphs: `about`
-- Skills: `skills`
-- Capability cards: `capabilities`
-- Project summaries, stack, status, and case-study details: `projects`
-- Education: `education`
-- Interests: `interests`
-- Credentials: `credentials` and `showCredentials`
-
-Only add links, technologies, features, credentials, or project statuses that can be verified.
-
-## Configure the contact form
-
-The default `formEndpoint` in `data.js` is empty. The form then opens the visitor's email app with a pre-filled message and does not claim it was sent. To enable direct submission:
-
-1. Create a free form at [Formspree](https://formspree.io/).
-2. Copy its endpoint (for example, `https://formspree.io/f/your-form-id`).
-3. Set `formEndpoint` in `data.js` to that URL.
-4. Test a submission and verify delivery in your Formspree inbox.
-
-The form includes a hidden honeypot and inline validation.
-
-## Add optional content
-
-- **LinkedIn:** already configured with the owner-provided clean profile URL.
-- **Phone:** set `profile.phone` to the number intended for public display.
-- **CV:** add `assets/cv/Ibad_Jahangir_CV.pdf` and set `profile.cv` to that relative path.
-- **Photo:** add a real portrait at `assets/images/profile.jpg` and set `profile.photo` in `data.js` to that relative path; the hero portrait card appears only when the path is set.
-- **Certificates:** add real entries to `credentials` and set `showCredentials: true`.
-- **Project screenshots:** place genuine files under `assets/images/`, add their relative paths to the relevant project's `screenshots` array in `data.js`, and the first available image replaces the illustration. The accessible lightbox opens that gallery. Current visuals are explicitly captioned as interface illustrations.
-
-## Customize colors
-
-Edit the CSS custom properties at the top of `style.css`. Dark and light theme tokens are defined separately.
-
-## Deploy on GitHub Pages
-
-1. Open repository **Settings → Pages**.
-2. Choose **Deploy from a branch**.
-3. Select `main` and `/(root)`, then save.
-4. Wait for GitHub Pages to publish.
-
-Expected URL after Pages is enabled: https://ebadjahangir.github.io/Ibad-demo/
-
-## Deploy on Vercel
-
-Import this repository in Vercel, choose the **Other** framework preset, leave build command and output directory empty, and deploy as a static site.
-
-## Git publishing commands
-
-For an existing local clone:
-
-```bash
-git add .
-git commit -m "Update portfolio to Precision Studio"
-git push origin main
-```
-
-Do not force-push over existing history.
-
-## Validation status
-
-GitHub source files and the private HMS README were inspected for this update. The repository files were updated through GitHub. No browser automation or local browser was available for this update; therefore responsive breakpoints, keyboard interactions, Formspree live delivery, Lighthouse, and automated accessibility checks have not been executed. No performance score or test pass is claimed. No Lighthouse score or browser-test pass is claimed.
+## Verification boundaries
+Source-level checks do not replace browser testing. No Lighthouse score, real-device test, or live Formspree delivery should be claimed unless run.
