@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ebadjahangir.github.io/Ibad-demo/sitemap.xml
