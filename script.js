@@ -40,7 +40,7 @@ menu.addEventListener('click',()=>{
   menu.setAttribute('aria-expanded','true');
   menu.setAttribute('aria-label','Close navigation');
   links.classList.add('open');
-  $('.nav-links a[href]:not([hidden])',links)[0]?.focus();
+  links.querySelector('a[href]:not([hidden])')?.focus();
 });
 links.addEventListener('click',ev=>{if(ev.target.closest('a'))closeMenu();});
 document.addEventListener('click',ev=>{
@@ -49,7 +49,7 @@ document.addEventListener('click',ev=>{
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeMenu();});
 links.addEventListener('keydown',ev=>{
   if(menu.getAttribute('aria-expanded')!=='true'||ev.key!=='Tab')return;
-  const focusables=$('a[href],button:not([disabled])',links).filter(el=>!el.hidden&&el.getClientRects().length);
+  const focusables=Array.from(links.querySelectorAll('a[href],button:not([disabled])')).filter(el=>!el.hidden&&el.getClientRects().length);
   if(!focusables.length)return;
   const first=focusables[0],last=focusables[focusables.length-1];
   if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus();}
