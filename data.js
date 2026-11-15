@@ -2,10 +2,10 @@
 window.PORTFOLIO_DATA = {
   profile: {
     name: "Ibad Jahangir",
-    headline: "AI & Software Developer | Aspiring Data Analyst | Mathematician",
-    supporting: "Aspiring Data Analyst | Mathematician",
+    headline: "AI & Software Developer | Aspiring Data Analyst | Mathematics background",
+    supporting: "Aspiring Data Analyst | Mathematics background",
     tagline: "Where Mathematics Meets Technology.",
-    description: "Exploring Artificial Intelligence, building practical software, and transforming ideas into intelligent digital solutions.",
+    description: "I build practical software, explore AI-assisted workflows, and work with data-backed applications.",
     location: "Multan, Pakistan",
     email: "ibadjahangir8100@gmail.com",
     github: "https://github.com/EbadJahangir",
@@ -16,10 +16,9 @@ window.PORTFOLIO_DATA = {
     availability: "Available for freelance projects and collaborations in AI, software and data."
   },
   about: [
-    "I am Ibad Jahangir, an AI & Software Developer and Mathematician with a strong interest in Artificial Intelligence, Software Development, and Data Analytics.",
-    "With a background in Mathematics, I enjoy exploring the connection between logical reasoning, analytical thinking, and modern technology.",
-    "I work on building practical software applications, experimenting with AI-powered solutions, developing backend systems, and working with databases.",
-    "My goal is to transform ideas into meaningful digital products while continuously exploring emerging technologies and improving my technical capabilities."
+    "I build practical software applications and explore AI-assisted workflows and data-driven systems.",
+    "My work focuses on backend development, relational databases, application workflows, and making information more useful through clear software.",
+    "I enjoy turning real-world requirements into maintainable digital tools while continuing to strengthen my software development and analytics skills."
   ],
   skills: [
     { title: "Programming & Development", code: "01 / CODE", description: "Languages and foundations for building useful digital experiences.", items: ["Python","HTML5","CSS3","JavaScript","SQL"] },
