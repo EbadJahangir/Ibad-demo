@@ -44,7 +44,7 @@ menu.addEventListener('click',()=>{
 });
 links.addEventListener('click',ev=>{if(ev.target.closest('a'))closeMenu();});
 document.addEventListener('click',ev=>{
-  if(menu.getAttribute('aria-expanded')==='true'&&!ev.target.closest('.site-header'))closeMenu();
+  if(menu.getAttribute('aria-expanded')==='true'&&!links.contains(ev.target)&&!menu.contains(ev.target))closeMenu();
 });
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeMenu();});
 links.addEventListener('keydown',ev=>{
