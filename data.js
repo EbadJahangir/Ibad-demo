@@ -45,10 +45,10 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "hms", number: "02", name: "Hospital Management", subtitle: "System",
-      description: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, and reporting workflows.",
+      description: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, stock, reporting, and role-scoped views.",
       status: "Working", statusType: "built",
       stack: ["Python","Flask","PostgreSQL","Vanilla JavaScript","Pytest"],
-      overview: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, and stock workflows.",
+      overview: "A database-driven hospital management application for patient records, doctors, departments, appointments, prescriptions, billing, pharmacy, stock, reporting, and role-scoped views.",
       problem: "A hospital needs consistent digital workflows for patient information, appointments, prescriptions, payments, medicine stock, and operational reporting.",
       workflow: ["Staff enter and manage records","Flask validates requests and applies business rules","PostgreSQL stores transactional data","Role-scoped views and reports present information"],
       implemented: ["Dashboard","Patients","Doctors","Departments","Appointments","Prescriptions","Billing","Pharmacy Management","Stock Management","Reporting","Role-scoped views"],
