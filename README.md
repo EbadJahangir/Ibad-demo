@@ -40,6 +40,8 @@ Ibad-demo/
 ```
 
 ## Edit content in data.js
+
+`data.js` is the source of truth for JavaScript-rendered content. The static HTML fallback in `index.html` is retained for JavaScript-disabled or `data.js`-failure cases; keep skills, capabilities, projects, module lists, education, interests, profile links, and availability in sync. When JavaScript loads successfully, the renderer replaces fallback containers rather than appending duplicate content.
 - `profile`: identity, links, availability, optional photo/CV/phone
 - `about`: four About paragraphs
 - `skills`: three skill categories and tags
