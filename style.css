@@ -383,3 +383,6 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--danger)}
   .projects-list>.project-block>.project-content>.project-actions .text-action,
   .projects-list>.project-block>.project-content>.project-actions .btn{min-height:44px}
 }
+/* Hide the status badge and the "Interface illustration" label on top of/inside the project pictures */
+.project-art .art-browser-bar .status,
+.project-art .art-label{display:none!important}
