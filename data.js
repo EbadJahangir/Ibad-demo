@@ -13,7 +13,7 @@ window.PORTFOLIO_DATA = {
     phone: "",
     photo: "",
     cv: "",
-    availability: "Open to opportunities, internships, freelance projects and collaborations in AI, software and data."
+    availability: "Available for freelance projects and collaborations in AI, software and data."
   },
   about: [
     "I am Ibad Jahangir, an AI & Software Developer and Mathematician with a strong interest in Artificial Intelligence, Software Development, and Data Analytics.",
