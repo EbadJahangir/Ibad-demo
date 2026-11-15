@@ -191,3 +191,16 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--danger)}
  .mock-interface{grid-template-columns:80px minmax(0,1fr);gap:8px}
  .mock-sidebar{font-size:8px;gap:8px}
 }
+
+/* Project cards: side-by-side on desktop, stacked on mobile */
+.projects-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch;gap:28px}
+.projects-list>.project-block{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:18px!important;min-width:0;padding:16px!important}
+.projects-list>.project-block .project-art{order:0!important;width:100%;min-height:250px;aspect-ratio:16/10;flex:none}
+.projects-list>.project-block .project-content{order:1!important;padding:8px 6px 10px!important;width:100%;min-width:0}
+.projects-list>.project-block .project-content h3{font-size:clamp(25px,2.5vw,34px)}
+.projects-list>.project-block .mock-interface{grid-template-columns:105px minmax(0,1fr)}
+@media(max-width:760px){
+ .projects-list{grid-template-columns:minmax(0,1fr)!important;gap:24px}
+ .projects-list>.project-block .project-art{min-height:230px}
+ .projects-list>.project-block .mock-interface{grid-template-columns:80px minmax(0,1fr)}
+}
