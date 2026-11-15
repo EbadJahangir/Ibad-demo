@@ -18,7 +18,7 @@ const gallery=$('#galleryDialog'),galleryImage=$('#galleryImage'),galleryCaption
 
 const cvFile='assets/cv/Ibad_Jahangir_CV.pdf';fetch(cvFile,{method:'HEAD'}).then(res=>{if(res.ok){$('#cv').hidden=false;$('#cvNav').hidden=false;}}).catch(()=>{});
 const e=D.education;$('#educationCard').innerHTML='<div class="edu-mark">BS</div><div><span class="skill-code">ACADEMIC BACKGROUND / 01</span><h3>'+esc(e.degree)+'</h3><p class="edu-institution">'+esc(e.institution)+'</p><p>'+esc(e.department)+' · '+esc(e.location)+'</p></div><span class="education-meta">'+esc(e.semester)+'</span>';
-$('#interestGrid').innerHTML=D.interests.map((x,i)=>'<article class="interest-item reveal" tabindex="0"><span>0'+(i+1)+'</span><div><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join('');
+$('#interestGrid').innerHTML=D.interests.map((x,i)=>'<article class="interest-item reveal"><span>0'+(i+1)+'</span><div><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join('');
 if(D.showCredentials&&D.credentials.length){$('#credentials').hidden=false;$('#credentialsNav').hidden=false;$('#credentialsGrid').innerHTML=D.credentials.map(c=>'<article><h3>'+esc(c.title)+'</h3><p>'+esc(c.issuer)+'</p></article>').join('');}
 const navAnchors=$$('.nav-links a[href^="#"]'), sections=navAnchors.map(a=>$(a.getAttribute('href'))).filter(Boolean);
 const progress=$('#progress'),back=$('#backTop');let ticking=false;
