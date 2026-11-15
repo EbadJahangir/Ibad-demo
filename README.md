@@ -34,11 +34,14 @@ Ibad-demo/
 ├── 404.html
 ├── robots.txt
 ├── sitemap.xml
+├── favicon.svg
 └── assets/
     ├── favicon/favicon.svg
     └── images/
+        ├── hero-workspace.svg
         ├── og-image.svg
-        └── og-image.png
+        ├── og-image.png
+        └── og-preview.svg
 ```
 
 ## Edit content in data.js
