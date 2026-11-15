@@ -55,7 +55,7 @@ links.addEventListener('keydown',ev=>{
   if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus();}
   else if(!ev.shiftKey&&document.activeElement===last){ev.preventDefault();first.focus();}
 });
-if(!reduced&&matchMedia('(pointer:fine)').matches){document.addEventListener('pointermove',ev=>{document.documentElement.style.setProperty('--pointer-x',ev.clientX+'px');document.documentElement.style.setProperty('--pointer-y',ev.clientY+'px');},{passive:true});}
+if(!reduced&&matchMedia('(hover: hover) and (pointer: fine)').matches){let pointerFrame=0,pointerEvent=null;document.addEventListener('pointermove',ev=>{pointerEvent=ev;if(pointerFrame)return;pointerFrame=requestAnimationFrame(()=>{if(pointerEvent){document.documentElement.style.setProperty('--pointer-x',pointerEvent.clientX+'px');document.documentElement.style.setProperty('--pointer-y',pointerEvent.clientY+'px');}pointerFrame=0;});},{passive:true});}
 
 const toast=$('#toast');let toastTimer;function notify(s){toast.textContent=s;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200);}
 async function copyEmail(){try{if(navigator.clipboard&&isSecureContext)await navigator.clipboard.writeText(p.email);else{const t=document.createElement('textarea');t.value=p.email;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();if(!document.execCommand('copy'))throw Error();t.remove();}notify('Email copied to clipboard');}catch{notify('Copy unavailable — use the email link');}}
