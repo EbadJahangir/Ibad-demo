@@ -169,26 +169,25 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--danger)}
 .nav-links>a[href="#contact"].active:after{display:none}
 .nav-links>a[href="#contact"]:hover:after,.nav-links>a[href="#contact"]:focus-visible:after{content:"";display:block;position:absolute;left:0;bottom:-9px;width:100%;height:1px;background:var(--accent)}
 
-/* FINAL FIX — project overview artwork, desktop project grid, and Contact nav */
-.projects-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:clamp(24px,3vw,40px)}
-.projects-list>.project-block{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:22px!important;margin:0!important;padding:0!important;border:1px solid var(--border)!important;border-radius:18px!important;background:var(--surface)!important;overflow:hidden;min-width:0}
-.projects-list>.project-block.project-reverse .project-content,.projects-list>.project-block.project-reverse .project-art{order:initial!important}
-.projects-list>.project-block .project-art{order:0!important;width:100%;aspect-ratio:16/10;min-height:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;box-shadow:none!important;transform:none!important;position:relative}
-.project-overview-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
-.projects-list>.project-block .project-art .art-label{position:absolute;left:14px;bottom:12px;margin:0;padding:7px 9px;border-radius:4px;background:rgba(8,16,13,.68);color:#f2dfb0;font:9px var(--mono);letter-spacing:.08em}
-.projects-list>.project-block .project-content{order:1!important;padding:0 24px 26px!important;width:100%;min-width:0}
-.projects-list>.project-block .project-content h3{font-size:clamp(26px,2.4vw,36px)}
-.projects-list>.project-block .project-features{gap:8px}
-.projects-list>.project-block .project-features li{grid-template-columns:16px minmax(0,1fr);align-items:start;font-size:13px}
-.projects-list>.project-block .feature-status{grid-column:2;white-space:normal;font-size:10px}
-.nav-links>a[href="#contact"]{border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;box-shadow:none!important;color:var(--muted)!important;font-size:inherit!important;outline:none!important}
-.nav-links>a[href="#contact"]:hover,.nav-links>a[href="#contact"].active{color:var(--text)!important}
+/* Refined project previews and navigation */
+.project-art{background:linear-gradient(145deg,#17291f,#0b1510)!important;border-color:#8a6a2a55!important}
+.project-art.hospital{background:linear-gradient(145deg,#1d3025,#101a14)!important}
+.mock-interface{color:#e5eadf}
+.mock-sidebar{color:#b1bdb3}
+.mock-sidebar>b{color:#d8b66b}
+.mock-title{color:#f5f0e5}
+.mock-chat i{color:#d8b66b}
+.mock-task span,.mock-table span{background:#d8b66b12;color:#d5ddd5}
+.mock-table i{color:#a7c4a9}
+.mock-stats i{background:linear-gradient(120deg,#d8b66b12,#8eae9028);border-color:#d8b66b30}
+.nav-links>a[href="#contact"]{border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;box-shadow:none!important;color:var(--muted)!important;font-size:inherit!important}
+.nav-links>a[href="#contact"]:hover,.nav-links>a[href="#contact"]:focus-visible{color:var(--text)!important}
 .nav-links>a[href="#contact"]:after{display:none!important}
 .nav-links>a[href="#contact"]:hover:after,.nav-links>a[href="#contact"]:focus-visible:after{display:block!important;content:"";position:absolute;left:0;bottom:-9px;width:100%;height:1px;background:var(--accent)}
+.hero-art-image{object-fit:contain!important;object-position:center!important;width:94%!important;height:94%!important}
 @media(max-width:760px){
- .projects-list{grid-template-columns:minmax(0,1fr)!important;gap:28px}
- .projects-list>.project-block{width:100%}
- .projects-list>.project-block .project-content{padding:0 20px 22px!important}
  .nav-links>a[href="#contact"]{width:fit-content!important;padding:11px 3px!important}
  .nav-links>a[href="#contact"]:hover:after,.nav-links>a[href="#contact"]:focus-visible:after{display:none!important}
+ .mock-interface{grid-template-columns:80px minmax(0,1fr);gap:8px}
+ .mock-sidebar{font-size:8px;gap:8px}
 }
